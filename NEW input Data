@@ -280,7 +280,6 @@ incommentDisabledList = []
 inratingDisabledList = []
 invideoErrororRemovedList = []
 for values in usVideoIDList[1:]:
-    print("usvideos")
     videoKey = values
     ustitleList.append(r.hget(values, "Title"))
     uschannelTitleList.append(r.hget(values, "channeltitle"))
@@ -294,7 +293,6 @@ for values in usVideoIDList[1:]:
     usratingDisabledList.append(r.hget(values, "ratingdisabled"))
     usvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in caVideoIDList[1:]:
-    print("cavid")
     videoKey = values
     catitleList.append(r.hget(values, "Title"))
     cachannelTitleList.append(r.hget(values, "channeltitle"))
@@ -323,7 +321,6 @@ for values in deVideoIDList[1:]:
     deratingDisabledList.append(r.hget(values, "ratingdisabled"))
     devideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in frVideoIDList[1:]:
-    print("frvid")
     videoKey = values
     frtrendingDateList.append(r.hget(values, "Trending_Date"))
     frtitleList.append(r.hget(values, "Title"))
@@ -339,7 +336,6 @@ for values in frVideoIDList[1:]:
     frratingDisabledList.append(r.hget(values, "ratingdisabled"))
     frvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in gbVideoIDList[1:]:
-    print("gbvid")
     videoKey = values
     gbtrendingDateList.append(r.hget(values, "Trending_Date"))
     gbtitleList.append(r.hget(values, "Title"))
@@ -355,7 +351,6 @@ for values in gbVideoIDList[1:]:
     gbratingDisabledList.append(r.hget(values, "ratingdisabled"))
     gbvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in inVideoIDList[1:]:
-    print('inid')
     videoKey = values
     intrendingDateList.append(r.hget(values, "Trending_Date"))
     intitleList.append(r.hget(values, "Title"))

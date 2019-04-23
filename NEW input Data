@@ -284,7 +284,6 @@ for values in usVideoIDList[1:]:
     uscommentDisabledList.append(r.hget(values, "commentDisabled"))
     usratingDisabledList.append(r.hget(values, "ratingdisabled"))
     usvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
-input()  # separates each set by country for easy testing
 for values in caVideoIDList[1:]:
     videoKey = values
     catitleList.append(r.hget(values, "Title"))
@@ -298,7 +297,6 @@ for values in caVideoIDList[1:]:
     cacommentDisabledList.append(r.hget(values, "commentDisabled"))
     caratingDisabledList.append(r.hget(values, "ratingdisabled"))
     cavideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
-input()
 for values in deVideoIDList[1:]:
     videoKey = values
     detrendingDateList.append(r.hget(values, "Trending_Date"))
@@ -314,7 +312,6 @@ for values in deVideoIDList[1:]:
     decommentDisabledList.append(r.hget(values, "commentDisabled"))
     deratingDisabledList.append(r.hget(values, "ratingdisabled"))
     devideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
-input()
 for values in frVideoIDList[1:]:
     videoKey = values
     frtrendingDateList.append(r.hget(values, "Trending_Date"))
@@ -329,8 +326,7 @@ for values in frVideoIDList[1:]:
     frcommentsList.append(r.hget(values, "comments"))
     frcommentDisabledList.append(r.hget(values, "commentDisabled"))
     frratingDisabledList.append(r.hget(values, "ratingdisabled"))
-    frvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
-input()
+    frvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"
 for values in gbVideoIDList[1:]:
     videoKey = values
     gbtrendingDateList.append(r.hget(values, "Trending_Date"))
@@ -345,8 +341,7 @@ for values in gbVideoIDList[1:]:
     gbcommentsList.append(r.hget(values, "comments"))
     gbcommentDisabledList.append(r.hget(values, "commentDisabled"))
     gbratingDisabledList.append(r.hget(values, "ratingdisabled"))
-    gbvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
-input()
+    gbvideoErrororRemovedList.append(r.hget(values, "viderrororremoved")
 for values in inVideoIDList[1:]:
     videoKey = values
     intrendingDateList.append(r.hget(values, "Trending_Date"))

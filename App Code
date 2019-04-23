@@ -1,0 +1,82 @@
+#
+# This is the user-interface definition of a Shiny web application. You can
+# run the application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+# 
+#    http://shiny.rstudio.com/
+#
+
+library(shiny)
+
+# Define UI for application that draws a histogram
+library(data.table)
+RegData <- USvideos
+fit <- lm(RegData$views~RegData$likes+RegData$dislikes+RegData$comment_count, data = RegData)
+summary(fit)
+dict = data.frame(type =c("Yes, No"), value = c(1,0))
+library(shiny)
+ui <- fluidPage(
+  titlePanel("Video View Estimator and Regression Equations"),
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(
+        inputId = "likes",
+        label = h3("Enter the Number of Likes "),
+        0, 100000, 5000, 25),
+      sliderInput(
+        inputId = "dislikes",
+        label = h3("Enter the Number of Disikes "),
+        0, 100000, 5000, 25),
+      sliderInput(
+        inputId = "comments",
+        label = h3("How many comments are there?"),
+        0, 100000, 5000, 25 )),
+    
+    mainPanel(tabsetPanel(
+      tabPanel("Regression Equation for the US",verbatimTextOutput("summary1")),
+      tabPanel("Views in the US",(textOutput("views1"))),
+      tabPanel("Views in Canada",(textOutput("views2"))),
+      tabPanel("Views in Great Britain",(textOutput("views3"))
+      )
+    )
+    )
+  ))
+  #
+# This is the server logic of a Shiny web application. You can run the 
+# application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+# 
+#    http://shiny.rstudio.com/
+#
+RegData <- USvideos
+fit <- lm(RegData$views~RegData$likes+RegData$dislikes+RegData$comment_count, data = RegData)
+summary(fit)
+library(shiny)
+
+server <- function(input,output) {
+  vals <- reactiveValues()
+  observe({
+    vals$category_id <- input$category_id
+    vals$likes <- input$likes
+    vals$dislikes <- input$dislikes
+    vals$comments_disabled <- input$comments_disabled
+    vals$rating <- input$rating
+    vals$comments <- input$comments
+  })
+  output$views1 <- renderText({
+    paste("The expected number of views in the US is:",198.1529 
+          +8.0630*vals$dislikes+ 3.8911*vals$likes-0.0046*vals$comments)
+  })
+  output$views2 <- renderText({
+    paste("The expected number of views in Canada is:",260.2249 
+          +7.4383*vals$dislikes+ 3.1212*vals$likes--0.0034*vals$comments)
+  })
+  output$views3 <- renderText({
+    paste("The expected number of views in Great Britain is:",-24.3655 
+          +10.1140*vals$dislikes+ 5.1784*vals$likes-0.0097*vals$comments)})
+  output$summary1 <- renderPrint(
+    summary(fit)
+  )
+}

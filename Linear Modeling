@@ -1,0 +1,412 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Apr  1 18:19:26 2019
+
+@author: sophiemassolas
+"""
+
+import numpy as np
+import pandas as pd
+from pandas import DataFrame
+import matplotlib.pyplot as plt
+from sklearn import linear_model
+import csv
+import os
+import seaborn as sns 
+import statsmodels.api as sm
+import tkinter as tk
+from sklearn.linear_model import LogisticRegression
+
+filename = 'USvideo.csv'
+data = pd.read_csv('USvideos.csv')
+
+
+
+x = data[['title','category_id','channel_title',
+          'publish_time','likes','dislikes',
+          'comment_count','comments_disabled',
+          'ratings_disabled','video_error_or_removed',
+          'description']]
+y = data[['views']]
+df = DataFrame (data, columns = ['title','category_id','channel_title',
+          'publish_time','likes','dislikes',
+          'comment_count','comments_disabled',
+          'ratings_disabled','video_error_or_removed',
+          'description','views'])
+print(df)
+obj_df = df.select_dtypes(include = ['object']).copy()
+#converting categorical variables to binary numbers 
+
+df['comment_count'] = df.comment_count.astype(int)
+df['comments_disabled'] = df.comments_disabled.astype(int)
+df.dtypes
+df['ratings_disabled'] = df.ratings_disabled.astype(int)
+df['video_error_or_removed'] = df.video_error_or_removed.astype(int)
+df.dtypes
+print(df["likes"].isnull().sum())
+df['likes'].fillna(0)
+print(df["likes"].isnull().sum())
+df['likes']=df['likes'].apply(np.sqrt)
+df['likes'] = df.likes.astype(int)
+
+print(df["dislikes"].isnull().sum())
+df['dislikes'].fillna(0)
+print(df["dislikes"].isnull().sum())
+df['dislikes']=df['dislikes'].apply(np.sqrt)
+df['dislikes'] = df.dislikes.astype(int)
+
+df["views"] = df['views'].apply(np.sqrt)
+
+df.dtypes
+#scatter plots of different variables 
+
+#scatterplot of catergory id and view 
+plt.scatter(df['category_id'], df['views'], color = 'red')
+plt.title('Category ID VS Views',fontsize = 14)
+plt.xlabel('Category ID',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of likes and views 
+plt.scatter(df['likes'], df['views'], color = 'red')
+plt.title('Likes VS Views',fontsize = 14)
+plt.xlabel('Likes',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+
+#scatterplot of dislikes and views 
+plt.scatter(df['dislikes'], df['views'], color = 'red')
+plt.title('Dislikes VS Views',fontsize = 14)
+plt.xlabel('Dislikes',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#plot of comments disabled 
+plt.scatter(df['comments_disabled'], df['views'], color = 'red')
+plt.title('Comments Disabled VS Views',fontsize = 14)
+plt.xlabel('Comments Disabled',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of ratings disabled 
+plt.scatter(df['ratings_disabled'], df['views'], color = 'red')
+plt.title('Ratings Disabled VS Views',fontsize = 14)
+plt.xlabel('Ratings Disabled',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of video error or removed 
+plt.scatter(df['video_error_or_removed'], df['views'], color = 'red')
+plt.title('Video Error or Removed VS Views',fontsize = 14)
+plt.xlabel('Video Error or Removed',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+
+#linear regression 
+X = df[['category_id','likes','dislikes',
+          'comment_count', 'comments_disabled','ratings_disabled' ]]
+Y = df[['views']]
+
+regr = linear_model.LinearRegression()
+regr.fit(X,Y)
+
+
+#testing to see where these fall 
+testcid = 22
+testlikes = 0
+testdislikes = 0
+testcc = 0
+testcd = 1
+testrd = 1
+testvr = 1
+print('Intercepts: \n', regr.intercept_)
+print('Coefficients: \n', regr.coef_)
+print('Predicted View: \n', regr.predict([[testcid,testlikes,testdislikes,testcc, testcd, testrd]]))
+
+
+X = sm.add_constant(X) # adding a constant
+ 
+model = sm.OLS(Y, X).fit()
+predictions = model.predict(X) 
+ 
+print_model = model.summary()
+print(print_model)
+
+
+
+#root.mainloop()
+
+#linear regression for canada 
+
+
+filename = 'CAvideos.csv'
+data2 = pd.read_csv('CAvideos.csv')
+
+
+
+x2 = data2[['title','category_id','channel_title',
+          'publish_time','likes','dislikes',
+          'comment_count','comments_disabled',
+          'ratings_disabled','video_error_or_removed',
+          'description']]
+y2 = data2[['views']]
+df2 = DataFrame (data2, columns = ['title','category_id','channel_title',
+          'publish_time','likes','dislikes',
+          'comment_count','comments_disabled',
+          'ratings_disabled','video_error_or_removed',
+          'description','views'])
+
+
+
+print(df2)
+
+
+#scatterplot of catergory id and view 
+plt.scatter(df2['category_id'], df2['views'], color = 'red')
+plt.title('Category ID VS Views',fontsize = 14)
+plt.xlabel('Category ID',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of likes and views 
+plt.scatter(df2['likes'], df2['views'], color = 'red')
+plt.title('Likes VS Views',fontsize = 14)
+plt.xlabel('Likes',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+
+#scatterplot of dislikes and views 
+plt.scatter(df2['dislikes'], df2['views'], color = 'red')
+plt.title('Dislikes VS Views',fontsize = 14)
+plt.xlabel('Dislikes',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#plot of comments disabled 
+plt.scatter(df2['comments_disabled'], df2['views'], color = 'red')
+plt.title('Comments Disabled VS Views',fontsize = 14)
+plt.xlabel('Comments Disabled',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of ratings disabled 
+plt.scatter(df2['ratings_disabled'], df2['views'], color = 'red')
+plt.title('Ratings Disabled VS Views',fontsize = 14)
+plt.xlabel('Ratings Disabled',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of video error or removed 
+plt.scatter(df2['video_error_or_removed'], df2['views'], color = 'red')
+plt.title('Video Error or Removed VS Views',fontsize = 14)
+plt.xlabel('Video Error or Removed',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+obj_df2 = df2.select_dtypes(include = ['object']).copy()
+#converting categorical variables to binary numbers 
+df2['comment_count'] = df2.comment_count.astype(int)
+df2['comments_disabled'] = df2.comments_disabled.astype(int)
+df2.dtypes
+df2['ratings_disabled'] = df2.ratings_disabled.astype(int)
+df2['video_error_or_removed'] = df2.video_error_or_removed.astype(int)
+df2.dtypes
+print(df2["likes"].isnull().sum())
+df2['likes'].fillna(0)
+print(df2["likes"].isnull().sum())
+df2['likes']=df2['likes'].apply(np.sqrt)
+df2['likes'] = df2.likes.astype(int)
+
+print(df2["dislikes"].isnull().sum())
+df2['dislikes'].fillna(0)
+print(df2["dislikes"].isnull().sum())
+df2['dislikes']=df2['dislikes'].apply(np.sqrt)
+df2['dislikes'] = df2.dislikes.astype(int)
+
+df2["views"] = df2['views'].apply(np.sqrt)
+print(df2["views"].isnull().sum())
+df2['views'].fillna(0)
+print(df2["views"].isnull().sum())
+df2['views'] = df2.views.astype(int)
+df2.dtypes
+
+
+
+#linear regression 
+X2 = df2[['category_id','likes','dislikes',
+          'comment_count', 'comments_disabled','ratings_disabled' ]]
+Y2 = df2[['views']]
+
+regr = linear_model.LinearRegression()
+regr.fit(X2,Y2)
+
+
+#testing to see where these fall 
+testcid = 22
+testlikes = 0
+testdislikes = 0
+testcc = 0
+testcd = 1
+testrd = 1
+testvr = 1
+print('Intercepts: \n', regr.intercept_)
+print('Coefficients: \n', regr.coef_)
+print('Predicted View: \n', regr.predict([[testcid,testlikes,testdislikes,testcc, testcd, testrd]]))
+
+
+X2 = sm.add_constant(X2) # adding a constant
+ 
+model2 = sm.OLS(Y2, X2).fit()
+predictions2 = model.predict(X2) 
+ 
+print_model2 = model2.summary()
+print(print_model2)
+
+#linear regression for Great Britain
+
+
+filename = 'GBvideos.csv'
+data3 = pd.read_csv('GBvideos.csv')
+
+
+
+x3 = data3[['title','category_id','channel_title',
+          'publish_time','likes','dislikes',
+          'comment_count','comments_disabled',
+          'ratings_disabled','video_error_or_removed',
+          'description']]
+y3 = data3[['views']]
+df3 = DataFrame (data3, columns = ['title','category_id','channel_title',
+          'publish_time','likes','dislikes',
+          'comment_count','comments_disabled',
+          'ratings_disabled','video_error_or_removed',
+          'description','views'])
+
+
+
+print(df3)
+
+
+#scatterplot of catergory id and view 
+plt.scatter(df3['category_id'], df3['views'], color = 'red')
+plt.title('Category ID VS Views',fontsize = 14)
+plt.xlabel('Category ID',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of likes and views 
+plt.scatter(df3['likes'], df3['views'], color = 'red')
+plt.title('Likes VS Views',fontsize = 14)
+plt.xlabel('Likes',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+
+#scatterplot of dislikes and views 
+plt.scatter(df3['dislikes'], df3['views'], color = 'red')
+plt.title('Dislikes VS Views',fontsize = 14)
+plt.xlabel('Dislikes',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#plot of comments disabled 
+plt.scatter(df3['comments_disabled'], df3['views'], color = 'red')
+plt.title('Comments Disabled VS Views',fontsize = 14)
+plt.xlabel('Comments Disabled',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of ratings disabled 
+plt.scatter(df3['ratings_disabled'], df3['views'], color = 'red')
+plt.title('Ratings Disabled VS Views',fontsize = 14)
+plt.xlabel('Ratings Disabled',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+#scatterplot of video error or removed 
+plt.scatter(df3['video_error_or_removed'], df3['views'], color = 'red')
+plt.title('Video Error or Removed VS Views',fontsize = 14)
+plt.xlabel('Video Error or Removed',fontsize = 14)
+plt.ylabel('Views',fontsize = 14)
+plt.grid(True)
+plt.show()
+
+obj_df3 = df3.select_dtypes(include = ['object']).copy()
+#converting categorical variables to binary numbers 
+df3['comment_count'] = df3.comment_count.astype(int)
+df3['comments_disabled'] = df3.comments_disabled.astype(int)
+df3.dtypes
+df3['ratings_disabled'] = df3.ratings_disabled.astype(int)
+df3['video_error_or_removed'] = df3.video_error_or_removed.astype(int)
+df3.dtypes
+print(df3["likes"].isnull().sum())
+df3['likes'].fillna(0)
+print(df3["likes"].isnull().sum())
+df3['likes']=df3['likes'].apply(np.sqrt)
+df3['likes'] = df3.likes.astype(int)
+
+print(df3["dislikes"].isnull().sum())
+df3['dislikes'].fillna(0)
+print(df3["dislikes"].isnull().sum())
+df3['dislikes']=df3['dislikes'].apply(np.sqrt)
+df3['dislikes'] = df3.dislikes.astype(int)
+
+df3["views"] = df3['views'].apply(np.sqrt)
+print(df3["views"].isnull().sum())
+df3['views'].fillna(0)
+print(df3["views"].isnull().sum())
+df3['views'] = df3.views.astype(int)
+df3.dtypes
+
+
+
+#linear regression 
+X3 = df3[['category_id','likes','dislikes',
+          'comment_count', 'comments_disabled','ratings_disabled' ]]
+Y3 = df3[['views']]
+
+regr = linear_model.LinearRegression()
+regr.fit(X3,Y3)
+
+
+#testing to see where these fall 
+testcid = 22
+testlikes = 0
+testdislikes = 0
+testcc = 0
+testcd = 0
+testrd = 0
+testvr = 0
+print('Intercepts: \n', regr.intercept_)
+print('Coefficients: \n', regr.coef_)
+print('Predicted View: \n', regr.predict([[testcid,testlikes,testdislikes,testcc, testcd, testrd]]))
+
+
+X3 = sm.add_constant(X3) # adding a constant
+ 
+model3 = sm.OLS(Y3, X3).fit()
+predictions3 = model.predict(X3) 
+ 
+print_model3 = model3.summary()
+print(print_model3)

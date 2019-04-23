@@ -1,6 +1,13 @@
 import csv
 import redis
 
+def format(list):
+    newList = []
+    for i in list:
+        newstring = i.decode("utf-8")
+        newList.append(newstring)
+    return newList
+
 usVideoIDList = []
 caVideoIDList = []
 deVideoIDList = []
@@ -9,6 +16,7 @@ gbVideoIDList = []
 inVideoIDList = []
 # create redis db
 r = redis.Redis(host='localhost', port=6379, db=0)
+
 # stores data from USvideos.csv
 with open('USvideos.csv', encoding='utf-8') as usData:
     readCSV = csv.reader(usData, delimiter=',')
@@ -272,6 +280,7 @@ incommentDisabledList = []
 inratingDisabledList = []
 invideoErrororRemovedList = []
 for values in usVideoIDList[1:]:
+    print("usvideos")
     videoKey = values
     ustitleList.append(r.hget(values, "Title"))
     uschannelTitleList.append(r.hget(values, "channeltitle"))
@@ -285,6 +294,7 @@ for values in usVideoIDList[1:]:
     usratingDisabledList.append(r.hget(values, "ratingdisabled"))
     usvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in caVideoIDList[1:]:
+    print("cavid")
     videoKey = values
     catitleList.append(r.hget(values, "Title"))
     cachannelTitleList.append(r.hget(values, "channeltitle"))
@@ -313,6 +323,7 @@ for values in deVideoIDList[1:]:
     deratingDisabledList.append(r.hget(values, "ratingdisabled"))
     devideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in frVideoIDList[1:]:
+    print("frvid")
     videoKey = values
     frtrendingDateList.append(r.hget(values, "Trending_Date"))
     frtitleList.append(r.hget(values, "Title"))
@@ -326,8 +337,9 @@ for values in frVideoIDList[1:]:
     frcommentsList.append(r.hget(values, "comments"))
     frcommentDisabledList.append(r.hget(values, "commentDisabled"))
     frratingDisabledList.append(r.hget(values, "ratingdisabled"))
-    frvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"
+    frvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in gbVideoIDList[1:]:
+    print("gbvid")
     videoKey = values
     gbtrendingDateList.append(r.hget(values, "Trending_Date"))
     gbtitleList.append(r.hget(values, "Title"))
@@ -341,8 +353,9 @@ for values in gbVideoIDList[1:]:
     gbcommentsList.append(r.hget(values, "comments"))
     gbcommentDisabledList.append(r.hget(values, "commentDisabled"))
     gbratingDisabledList.append(r.hget(values, "ratingdisabled"))
-    gbvideoErrororRemovedList.append(r.hget(values, "viderrororremoved")
+    gbvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 for values in inVideoIDList[1:]:
+    print('inid')
     videoKey = values
     intrendingDateList.append(r.hget(values, "Trending_Date"))
     intitleList.append(r.hget(values, "Title"))
@@ -357,3 +370,80 @@ for values in inVideoIDList[1:]:
     incommentDisabledList.append(r.hget(values, "commentDisabled"))
     inratingDisabledList.append(r.hget(values, "ratingdisabled"))
     invideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
+ustitleList = format(ustitleList)
+uschannelTitleList = format(uschannelTitleList)
+uscategoryIDList = format(uscategoryIDList)
+uspublishTimeList = format(uspublishTimeList)
+usviewCountList = format(usviewCountList)
+uslikeCountList = format(uslikeCountList)
+usdislikeCountList = format(usdislikeCountList)
+uscommentsList = format(uscommentsList)
+usthumbnailLinkList = format(usthumbnailLinkList)
+uscommentDisabledList = format(uscommentDisabledList)
+usratingDisabledList = format(usratingDisabledList)
+usvideoErrororRemovedList = format(usvideoErrororRemovedList)
+catitleList = format(catitleList)
+cachannelTitleList = format(cachannelTitleList)
+cacategoryIDList = format(cacategoryIDList)
+capublishTimeList = format(capublishTimeList)
+caviewCountList = format(caviewCountList)
+calikeCountList = format(calikeCountList)
+cadislikeCountList = format(cadislikeCountList)
+cacommentsList = format(cacommentsList)
+cathumbnailLinkList = format(cathumbnailLinkList)
+cacommentDisabledList = format(cacommentDisabledList)
+caratingDisabledList = format(caratingDisabledList)
+cavideoErrororRemovedList = format(cavideoErrororRemovedList)
+gbtrendingDateList = format(gbtrendingDateList)
+gbtitleList = format(gbtitleList)
+gbchannelTitleList = format(gbchannelTitleList)
+gbcategoryIDList = format(gbcategoryIDList)
+gbpublishTimeList = format(gbpublishTimeList)
+gbtagList = format(gbtagList)
+gbviewCountList = format(gbviewCountList)
+gblikeCountList = format(gblikeCountList)
+gbdislikeCountList = format(gbdislikeCountList)
+gbcommentsList = format(gbcommentsList)
+gbcommentDisabledList =format(gbcommentDisabledList)
+gbratingDisabledList= format(gbratingDisabledList)
+gbvideoErrororRemovedList= format(gbvideoErrororRemovedList)
+frtrendingDateList = format(frtrendingDateList)
+frtitleList = format(frtitleList)
+frchannelTitleList = format(frchannelTitleList)
+frcategoryIDList = format(frcategoryIDList)
+frpublishTimeList = format(frpublishTimeList)
+frtagList =format(frtagList)
+frviewCountList = format(frviewCountList)
+frlikeCountList = format(frlikeCountList)
+frdislikeCountList = format(frdislikeCountList)
+frcommentsList = format(frcommentsList)
+frcommentDisabledList = format(frcommentDisabledList)
+frratingDisabledList = format(frratingDisabledList)
+frvideoErrororRemovedList = format(frvideoErrororRemovedList)
+detrendingDateList = format(detrendingDateList)
+detitleList =format(detitleList)
+dechannelTitleList = format(dechannelTitleList)
+decategoryIDList = format(decategoryIDList)
+depublishTimeList = format(depublishTimeList)
+detagList = format(detagList)
+deviewCountList = format(deviewCountList)
+delikeCountList = format(delikeCountList)
+dedislikeCountList = format(dedislikeCountList)
+decommentsList = format(decommentsList)
+decommentDisabledList = format(decommentDisabledList)
+deratingDisabledList = format(deratingDisabledList)
+devideoErrororRemovedList = format(devideoErrororRemovedList)
+intrendingDateList = format(intrendingDateList)
+intitleList = format(intitleList)
+inchannelTitleList = format(inchannelTitleList)
+incategoryIDList = format(incategoryIDList)
+inpublishTimeList =format(inpublishTimeList)
+intagList = format(intagList)
+inviewCountList = format(inviewCountList)
+inlikeCountList =format(inlikeCountList)
+indislikeCountList = format(indislikeCountList)
+incommentsList =format(incommentsList)
+incommentDisabledList = format(incommentDisabledList)
+inratingDisabledList = format(inratingDisabledList)
+invideoErrororRemovedList = format(invideoErrororRemovedList)
+

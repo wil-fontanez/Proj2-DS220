@@ -1,0 +1,271 @@
+
+import csv
+import redis
+import json
+# create redis db
+r = redis.Redis(host='localhost', port=6379, db=0)
+# stores data from USvideos.csv
+with open('USvideos.csv', encoding='utf-8') as usData:
+    readCSV = csv.reader(usData, delimiter=',')
+    for row in readCSV:
+        videoID = row[0]
+        trendingDate = row[1]
+        titleName = row[2]
+        channelTitle = row[3]
+        categoryID = row[4]
+        publishTime = row[5]
+        tag = row[6]
+        view = row[7]
+        like = row[8]
+        dislike = row[9]
+        commentCount = row[10]
+        thumbnailLink = row[11]
+        commentsDisabled = row[12]
+        ratingsDisabled = row[13]
+        videoErrorOrRemoved = row[14]
+        description = row[15]
+        video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
+                        categoryid=str(categoryID),
+                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                        dislikecount=str(dislike),
+                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                        commentDisabled=str(commentsDisabled),
+                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                        Description=str(description))
+        r.hset(videoID, video)
+        
+keylist = []
+for key in r.keys("*"):
+    key = str(key,'utf-8')
+    keylist.append(key)
+    i = 10
+    while i  > 0:
+        i = i -1
+        for j in keylist:
+            w = r.hgetall(j)
+#print(keylist)
+
+print(w)
+for q in w:
+    q = q.decode("utf-8")
+    print(q)
+dictlist = []
+for key,value in w.items():
+    temp = [key,value]
+    dictlist.append(temp)
+print(dictlist)
+#category id
+category = dictlist[2][1]
+category = category.decode("utf-8")
+print(category)
+#comment count
+commentcount = dictlist[3][1]
+commentcount = commentcount.decode("utf-8")
+print(commentcount)
+#likecount
+likecount = dictlist[4][1]
+likecount = likecount.decode("utf-8")
+print(likecount)
+#tag
+tag = dictlist[5][1]
+tag = tag.decode("utf-8")
+print(tag)
+
+#viderrororremoved
+viderrororremoved = dictlist[6][1]
+viderrororremoved = viderrororremoved.decode("utf-8")
+print(viderrororremoved)
+
+#viewcount
+viewCount = dictlist[7][1]
+viewCount = viewCount.decode("utf-8")
+print(viewCount)
+
+#commentDisabled
+commentDisabled = dictlist[8][1]
+commentDisabled = commentDisabled.decode("utf-8")
+print(commentDisabled)
+
+#Trending_Date
+Trending_Date = dictlist[9][1]
+Trending_Date = Trending_Date.decode("utf-8")
+print(Trending_Date)
+
+#publishtime
+publishtime = dictlist[10][1]
+publishtime = publishtime.decode("utf-8")
+print(publishtime)
+
+#Title
+Title = dictlist[11][1]
+Title = Title.decode("utf-8")
+print(Title)
+
+#ratingdisabled
+ratingdisabled = dictlist[12][1]
+ratingdisabled = ratingdisabled.decode("utf-8")
+print(ratingdisabled)
+
+
+#channeltitle
+channeltitle = dictlist[13][1]
+channeltitle = channeltitle.decode("utf-8")
+print(channeltitle)
+
+#channeltitle
+dislikecount = dictlist[14][1]
+dislikecount = dislikecount.decode("utf-8")
+print(dislikecount)
+
+
+        
+        
+# stores data from CAvideos.csv
+with open('CAvideos.csv', encoding='utf-8') as caData:
+    readCSV = csv.reader(caData, delimiter=',')
+    for row in readCSV:
+        videoID = row[0]
+        trendingDate = row[1]
+        titleName = row[2]
+        channelTitle = row[3]
+        categoryID = row[4]
+        publishTime = row[5]
+        tag = row[6]
+        view = row[7]
+        like = row[8]
+        dislike = row[9]
+        commentCount = row[10]
+        thumbnailLink = row[11]
+        commentsDisabled = row[12]
+        ratingsDisabled = row[13]
+        videoErrorOrRemoved = row[14]
+        description = row[15]
+        video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
+                        categoryid=str(categoryID),
+                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                        dislikecount=str(dislike),
+                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                        commentDisabled=str(commentsDisabled),
+                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                        Description=str(description))
+        r.hmset(videoID, video)
+# stores data from DEvideos
+with open('DEvideos.csv', encoding='utf-8') as deData:
+    readCSV = csv.reader(deData, delimiter=',')
+    for row in readCSV:
+        videoID = row[0]
+        trendingDate = row[1]
+        titleName = row[2]
+        channelTitle = row[3]
+        categoryID = row[4]
+        publishTime = row[5]
+        tag = row[6]
+        view = row[7]
+        like = row[8]
+        dislike = row[9]
+        commentCount = row[10]
+        thumbnailLink = row[11]
+        commentsDisabled = row[12]
+        ratingsDisabled = row[13]
+        videoErrorOrRemoved = row[14]
+        description = row[15]
+        video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
+                        categoryid=str(categoryID),
+                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                        dislikecount=str(dislike),
+                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                        commentDisabled=str(commentsDisabled),
+                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                        Description=str(description))
+        r.hmset(videoID, video)
+# stores data from FRvideos
+with open('FRvideos.csv', encoding='utf-8') as frData:
+    readCSV = csv.reader(frData, delimiter=',')
+    for row in readCSV:
+        videoID = row[0]
+        trendingDate = row[1]
+        titleName = row[2]
+        channelTitle = row[3]
+        categoryID = row[4]
+        publishTime = row[5]
+        tag = row[6]
+        view = row[7]
+        like = row[8]
+        dislike = row[9]
+        commentCount = row[10]
+        thumbnailLink = row[11]
+        commentsDisabled = row[12]
+        ratingsDisabled = row[13]
+        videoErrorOrRemoved = row[14]
+        description = row[15]
+        video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
+                        categoryid=str(categoryID),
+                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                        dislikecount=str(dislike),
+                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                        commentDisabled=str(commentsDisabled),
+                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                        Description=str(description))
+        r.hmset(videoID, video)
+with open('GBvideos.csv', encoding='utf-8') as gbData:
+    readCSV = csv.reader(gbData, delimiter=',')
+    for row in readCSV:
+        videoID = row[0]
+        trendingDate = row[1]
+        titleName = row[2]
+        channelTitle = row[3]
+        categoryID = row[4]
+        publishTime = row[5]
+        tag = row[6]
+        view = row[7]
+        like = row[8]
+        dislike = row[9]
+        commentCount = row[10]
+        thumbnailLink = row[11]
+        commentsDisabled = row[12]
+        ratingsDisabled = row[13]
+        videoErrorOrRemoved = row[14]
+        description = row[15]
+        video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
+                        categoryid=str(categoryID),
+                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                        dislikecount=str(dislike),
+                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                        commentDisabled=str(commentsDisabled),
+                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                        Description=str(description))
+        r.hmset(videoID, video)
+# stores data from INvideos
+with open('INvideos.csv', encoding='utf-8') as inData:
+    readCSV = csv.reader(inData, delimiter=',')
+    for row in readCSV:
+        videoID = row[0]
+        trendingDate = row[1]
+        titleName = row[2]
+        channelTitle = row[3]
+        categoryID = row[4]
+        publishTime = row[5]
+        tag = row[6]
+        view = row[7]
+        like = row[8]
+        dislike = row[9]
+        commentCount = row[10]
+        thumbnailLink = row[11]
+        commentsDisabled = row[12]
+        ratingsDisabled = row[13]
+        videoErrorOrRemoved = row[14]
+        description = row[15]
+        video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
+                        categoryid=str(categoryID),
+                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                        dislikecount=str(dislike),
+                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                        commentDisabled=str(commentsDisabled),
+                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                        Description=str(description))
+        r.hmset(videoID, video)
+# allow queries for all data from a video given video key enter -1 to stop
+videoKey = ""
+while videoKey != "-1":
+    videoKey=input("videokey")
+    print(r.hgetall(videoKey))

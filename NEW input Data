@@ -1,5 +1,6 @@
 import csv
 import redis
+
 usVideoIDList = []
 caVideoIDList = []
 deVideoIDList = []
@@ -31,13 +32,13 @@ with open('USvideos.csv', encoding='utf-8') as usData:
         videoErrorOrRemoved = row[14]
         description = row[15]
         video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
-                        categoryid=str(categoryID),
-                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
-                        dislikecount=str(dislike),
-                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
-                        commentDisabled=str(commentsDisabled),
-                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
-                        Description=str(description))
+                     categoryid=str(categoryID),
+                     publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                     dislikecount=str(dislike),
+                     comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                     commentDisabled=str(commentsDisabled),
+                     ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                     Description=str(description))
         r.hmset(videoID, video)
 
 # stores data from CAvideos.csv
@@ -62,13 +63,13 @@ with open('CAvideos.csv', encoding='utf-8') as caData:
         videoErrorOrRemoved = row[14]
         description = row[15]
         video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
-                        categoryid=str(categoryID),
-                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
-                        dislikecount=str(dislike),
-                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
-                        commentDisabled=str(commentsDisabled),
-                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
-                        Description=str(description))
+                     categoryid=str(categoryID),
+                     publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                     dislikecount=str(dislike),
+                     comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                     commentDisabled=str(commentsDisabled),
+                     ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                     Description=str(description))
         r.hmset(videoID, video)
 # stores data from DEvideos
 with open('DEvideos.csv', encoding='utf-8') as deData:
@@ -92,13 +93,13 @@ with open('DEvideos.csv', encoding='utf-8') as deData:
         videoErrorOrRemoved = row[14]
         description = row[15]
         video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
-                        categoryid=str(categoryID),
-                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
-                        dislikecount=str(dislike),
-                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
-                        commentDisabled=str(commentsDisabled),
-                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
-                        Description=str(description))
+                     categoryid=str(categoryID),
+                     publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                     dislikecount=str(dislike),
+                     comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                     commentDisabled=str(commentsDisabled),
+                     ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                     Description=str(description))
         r.hmset(videoID, video)
 # stores data from FRvideos
 with open('FRvideos.csv', encoding='utf-8') as frData:
@@ -122,13 +123,13 @@ with open('FRvideos.csv', encoding='utf-8') as frData:
         videoErrorOrRemoved = row[14]
         description = row[15]
         video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
-                        categoryid=str(categoryID),
-                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
-                        dislikecount=str(dislike),
-                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
-                        commentDisabled=str(commentsDisabled),
-                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
-                        Description=str(description))
+                     categoryid=str(categoryID),
+                     publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                     dislikecount=str(dislike),
+                     comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                     commentDisabled=str(commentsDisabled),
+                     ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                     Description=str(description))
         r.hmset(videoID, video)
 with open('GBvideos.csv', encoding='utf-8') as gbData:
     readCSV = csv.reader(gbData, delimiter=',')
@@ -151,13 +152,13 @@ with open('GBvideos.csv', encoding='utf-8') as gbData:
         videoErrorOrRemoved = row[14]
         description = row[15]
         video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
-                        categoryid=str(categoryID),
-                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
-                        dislikecount=str(dislike),
-                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
-                        commentDisabled=str(commentsDisabled),
-                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
-                        Description=str(description))
+                     categoryid=str(categoryID),
+                     publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                     dislikecount=str(dislike),
+                     comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                     commentDisabled=str(commentsDisabled),
+                     ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                     Description=str(description))
         r.hmset(videoID, video)
 # stores data from INvideos
 with open('INvideos.csv', encoding='utf-8') as inData:
@@ -182,38 +183,182 @@ with open('INvideos.csv', encoding='utf-8') as inData:
         description = row[15]
 
         video = dict(Trending_Date=str(trendingDate), Title=str(titleName), channeltitle=str(channelTitle),
-                        categoryid=str(categoryID),
-                        publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
-                        dislikecount=str(dislike),
-                        comments=str(commentCount), thumbnaillink=str(thumbnailLink),
-                        commentDisabled=str(commentsDisabled),
-                        ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
-                        Description=str(description))
+                     categoryid=str(categoryID),
+                     publishtime=str(publishTime), Tag=str(tag), viewCount=str(view), likeCount=str(like),
+                     dislikecount=str(dislike),
+                     comments=str(commentCount), thumbnaillink=str(thumbnailLink),
+                     commentDisabled=str(commentsDisabled),
+                     ratingdisabled=str(ratingsDisabled), viderrororremoved=str(videoErrorOrRemoved),
+                     Description=str(description))
         r.hmset(videoID, video)
 
 # Displays all data by iterating through lists of videoID's separated by country
 
 videoKey = ""
+ustitleList = []
+uschannelTitleList = []
+uscategoryIDList = []
+uspublishTimeList = []
+usviewCountList = []
+uslikeCountList = []
+usdislikeCountList = []
+uscommentsList = []
+usthumbnailLinkList = []
+uscommentDisabledList = []
+usratingDisabledList = []
+usvideoErrororRemovedList = []
+catitleList = []
+cachannelTitleList = []
+cacategoryIDList = []
+capublishTimeList = []
+caviewCountList = []
+calikeCountList = []
+cadislikeCountList = []
+cacommentsList = []
+cathumbnailLinkList = []
+cacommentDisabledList = []
+caratingDisabledList = []
+cavideoErrororRemovedList = []
+gbtrendingDateList = []
+gbtitleList = []
+gbchannelTitleList = []
+gbcategoryIDList = []
+gbpublishTimeList = []
+gbtagList = []
+gbviewCountList = []
+gblikeCountList = []
+gbdislikeCountList = []
+gbcommentsList = []
+gbcommentDisabledList =[]
+gbratingDisabledList= []
+gbvideoErrororRemovedList= []
+frtrendingDateList = []
+frtitleList = []
+frchannelTitleList = []
+frcategoryIDList = []
+frpublishTimeList = []
+frtagList =[]
+frviewCountList = []
+frlikeCountList = []
+frdislikeCountList = []
+frcommentsList = []
+frcommentDisabledList = []
+frratingDisabledList = []
+frvideoErrororRemovedList = []
+detrendingDateList = []
+detitleList =[]
+dechannelTitleList = []
+decategoryIDList = []
+depublishTimeList = []
+detagList = []
+deviewCountList = []
+delikeCountList = []
+dedislikeCountList = []
+decommentsList = []
+decommentDisabledList = []
+deratingDisabledList = []
+devideoErrororRemovedList = []
+intrendingDateList = []
+intitleList = []
+inchannelTitleList = []
+incategoryIDList = []
+inpublishTimeList =[]
+intagList = []
+inviewCountList = []
+inlikeCountList =[]
+indislikeCountList = []
+incommentsList =[]
+incommentDisabledList = []
+inratingDisabledList = []
+invideoErrororRemovedList = []
 for values in usVideoIDList[1:]:
     videoKey = values
-    print(r.hgetall(videoKey))
-input() # separates each set by country for easy testing
+    ustitleList.append(r.hget(values, "Title"))
+    uschannelTitleList.append(r.hget(values, "channeltitle"))
+    uscategoryIDList.append(r.hget(values, "categoryid"))
+    uspublishTimeList.append(r.hget(values, "publishtime"))
+    usviewCountList.append(r.hget(values, "viewCount"))
+    uslikeCountList.append(r.hget(values, "likeCount"))
+    usdislikeCountList.append(r.hget(values, "dislikecount"))
+    uscommentsList.append(r.hget(values, "comments"))
+    uscommentDisabledList.append(r.hget(values, "commentDisabled"))
+    usratingDisabledList.append(r.hget(values, "ratingdisabled"))
+    usvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
+input()  # separates each set by country for easy testing
 for values in caVideoIDList[1:]:
     videoKey = values
-    print(r.hgetall(videoKey))
+    catitleList.append(r.hget(values, "Title"))
+    cachannelTitleList.append(r.hget(values, "channeltitle"))
+    cacategoryIDList.append(r.hget(values, "categoryid"))
+    capublishTimeList.append(r.hget(values, "publishtime"))
+    caviewCountList.append(r.hget(values, "viewCount"))
+    calikeCountList.append(r.hget(values, "likeCount"))
+    cadislikeCountList.append(r.hget(values, "dislikecount"))
+    cacommentsList.append(r.hget(values, "comments"))
+    cacommentDisabledList.append(r.hget(values, "commentDisabled"))
+    caratingDisabledList.append(r.hget(values, "ratingdisabled"))
+    cavideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 input()
 for values in deVideoIDList[1:]:
     videoKey = values
-    print(r.hgetall(videoKey))
+    detrendingDateList.append(r.hget(values, "Trending_Date"))
+    detitleList.append(r.hget(values, "Title"))
+    dechannelTitleList.append(r.hget(values, "channeltitle"))
+    decategoryIDList.append(r.hget(values, "categoryid"))
+    depublishTimeList.append(r.hget(values, "publishtime"))
+    detagList.append(r.hget(values, "Tag"))
+    deviewCountList.append(r.hget(values, "viewCount"))
+    delikeCountList.append(r.hget(values, "likeCount"))
+    dedislikeCountList.append(r.hget(values, "dislikecount"))
+    decommentsList.append(r.hget(values, "comments"))
+    decommentDisabledList.append(r.hget(values, "commentDisabled"))
+    deratingDisabledList.append(r.hget(values, "ratingdisabled"))
+    devideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 input()
 for values in frVideoIDList[1:]:
     videoKey = values
-    print(r.hgetall(videoKey))
+    frtrendingDateList.append(r.hget(values, "Trending_Date"))
+    frtitleList.append(r.hget(values, "Title"))
+    frchannelTitleList.append(r.hget(values, "channeltitle"))
+    frcategoryIDList.append(r.hget(values, "categoryid"))
+    frpublishTimeList.append(r.hget(values, "publishtime"))
+    frtagList.append(r.hget(values, "Tag"))
+    frviewCountList.append(r.hget(values, "viewCount"))
+    frlikeCountList.append(r.hget(values, "likeCount"))
+    frdislikeCountList.append(r.hget(values, "dislikecount"))
+    frcommentsList.append(r.hget(values, "comments"))
+    frcommentDisabledList.append(r.hget(values, "commentDisabled"))
+    frratingDisabledList.append(r.hget(values, "ratingdisabled"))
+    frvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 input()
 for values in gbVideoIDList[1:]:
     videoKey = values
-    print(r.hgetall(videoKey))
+    gbtrendingDateList.append(r.hget(values, "Trending_Date"))
+    gbtitleList.append(r.hget(values, "Title"))
+    gbchannelTitleList.append(r.hget(values, "channeltitle"))
+    gbcategoryIDList.append(r.hget(values, "categoryid"))
+    gbpublishTimeList.append(r.hget(values, "publishtime"))
+    gbtagList.append(r.hget(values, "Tag"))
+    gbviewCountList.append(r.hget(values, "viewCount"))
+    gblikeCountList.append(r.hget(values, "likeCount"))
+    gbdislikeCountList.append(r.hget(values, "dislikecount"))
+    gbcommentsList.append(r.hget(values, "comments"))
+    gbcommentDisabledList.append(r.hget(values, "commentDisabled"))
+    gbratingDisabledList.append(r.hget(values, "ratingdisabled"))
+    gbvideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
 input()
 for values in inVideoIDList[1:]:
     videoKey = values
-    print(r.hgetall(videoKey))
+    intrendingDateList.append(r.hget(values, "Trending_Date"))
+    intitleList.append(r.hget(values, "Title"))
+    inchannelTitleList.append(r.hget(values, "channeltitle"))
+    incategoryIDList.append(r.hget(values, "categoryid"))
+    inpublishTimeList.append(r.hget(values, "publishtime"))
+    intagList.append(r.hget(values, "Tag"))
+    inviewCountList.append(r.hget(values, "viewCount"))
+    inlikeCountList.append(r.hget(values, "likeCount"))
+    indislikeCountList.append(r.hget(values, "dislikecount"))
+    incommentsList.append(r.hget(values, "comments"))
+    incommentDisabledList.append(r.hget(values, "commentDisabled"))
+    inratingDisabledList.append(r.hget(values, "ratingdisabled"))
+    invideoErrororRemovedList.append(r.hget(values, "viderrororremoved"))
